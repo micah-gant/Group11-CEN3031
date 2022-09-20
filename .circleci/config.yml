@@ -1,19 +1,17 @@
 version: 2.1
 
 jobs:
-  build:
+  example-job:
     docker:
-      - image: cimg/node:17.2.0
+      # replace with your preferred image
+      - image: cimg/base:2021.04
     steps:
-      - checkout
-      - run: echo "hello world"
       - sonarcloud/scan
 
 orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.3
+  sonarcloud: sonarsource/sonarcloud@1.1.1
 
 workflows:
-  main:
+  example-workflow:
     jobs:
-      - build:
-          context: SonarCloud
+      - example-job
