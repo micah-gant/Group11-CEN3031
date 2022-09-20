@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.1.1
+
 jobs:
   example-job:
     docker:
@@ -7,9 +10,6 @@ jobs:
       - image: cimg/base:2021.04
     steps:
       - sonarcloud/scan
-
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.1.1
 
 workflows:
   example-workflow:
