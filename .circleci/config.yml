@@ -3,13 +3,10 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/node:17.2.0
     steps:
       - checkout
-      - run:
-          name: Install dependencies and build project
-          command: |
-            echo 'Hello World!'
+      - run: echo "hello world"
       - sonarcloud/scan
 
 orbs:
