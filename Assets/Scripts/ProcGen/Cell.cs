@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Cell
@@ -7,16 +8,63 @@ public class Cell
     //Need data structure for possibilities (Rules)
     //6 possibilities (4 rotations for slope)
 
-    private float weight;
-    bool isCollapsed = false;
+    public int[] position = new int[2];
+    private int weight;
     int currentState = -1; //Negative one for no state
-    private int[] states; //Possible states
+    private List<int> states; //Possible states
 
-    public Cell()
+    public Cell(int row, int col)
     {
         //Debug.Log("Created Cell");
+        position[0] = row;
+        position[1] = col;
+        states = new List<int>{0,1,2,3,4,5}; //Could be any of the six
+        weight = states.Count;
+    }
 
-        states = new int[]{0,1,2,3,4,5}; //Could be any of the six
-        weight = states.Length;
+    public int getCurrentState()
+    {
+        return currentState;
+    }
+
+    public int getWeight()
+    {
+        return weight;
+    }
+
+    public void setWeight(int weight)
+    {
+        this.weight = weight;
+    }
+
+    public void removeStates(ref int[] allowedStates) //aS for allowed states
+    {
+        List<int> aS = new();
+        foreach(int a in allowedStates)
+        {
+            aS.Add(a); //convert to List
+        }
+
+        //all I do is write bad code all day :/
+        IEnumerable<int> tempIE = (IEnumerable<int>)states.Intersect(aS);
+        states = tempIE.ToList();
+
+        //Testing
+        //foreach (int id in states)
+        //    Debug.Log(id);
+    }
+
+    public bool checkIfCollapsed()
+    {
+        if(currentState == -1)
+            return false; //not collapsed
+        return true; // collapsed
+    }
+
+    public void collapse()
+    {
+        int rNum = Random.Range(0, states.Count-1);
+        //Debug.Log(states[rNum]);
+        currentState = rNum;
     }
 }

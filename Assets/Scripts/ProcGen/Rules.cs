@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rules : MonoBehaviour
+public class Rules
 {
 	/* Process ============================================================================================================
 	 * So there's a bunch of rules for slopes, but for short and tall they can basically have anything next to them except each other
