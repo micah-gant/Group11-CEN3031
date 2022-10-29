@@ -77,17 +77,17 @@ public class Rules
 		shrt = new int[][]
 		{
 			new int[] {SHRT,SDOWN}, //UP
-			new int[] {SHRT,SLEFT}, //RIGHT
+			new int[] {SHRT,SRIGHT}, //RIGHT
 			new int[] {SHRT,SUP}, //DOWN
-			new int[] {SHRT,SRIGHT}  //LEFT
+			new int[] {SHRT,SLEFT}  //LEFT
 		};
 
 		tall = new int[][]
 		{
 			new int[] {TALL,SUP}, //UP
-			new int[] {TALL,SRIGHT}, //RIGHT
+			new int[] {TALL,SLEFT}, //RIGHT
 			new int[] {TALL,SDOWN}, //DOWN
-			new int[] {TALL,SLEFT}  //LEFT
+			new int[] {TALL,SRIGHT}  //LEFT
 		};
 	}
 

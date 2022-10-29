@@ -27,6 +27,11 @@ public class Cell
         return currentState;
     }
 
+    public void setCurrentState(int state)
+    {
+        this.currentState = state;
+    }
+
     public int getWeight()
     {
         return weight;
@@ -48,23 +53,24 @@ public class Cell
         //all I do is write bad code all day :/
         IEnumerable<int> tempIE = (IEnumerable<int>)states.Intersect(aS);
         states = tempIE.ToList();
-
+        weight = states.Count;
         //Testing
+        //Debug.Log("Row: " + position[0] + ", Col: " + position[1]);
         //foreach (int id in states)
         //    Debug.Log(id);
     }
 
     public bool checkIfCollapsed()
     {
-        if(currentState == -1)
-            return false; //not collapsed
-        return true; // collapsed
+        if(currentState != -1)
+            return true; //collapsed
+        return false; //not collapsed
     }
 
     public void collapse()
     {
         int rNum = Random.Range(0, states.Count-1);
         //Debug.Log(states[rNum]);
-        currentState = rNum;
+        currentState = states[rNum];
     }
 }

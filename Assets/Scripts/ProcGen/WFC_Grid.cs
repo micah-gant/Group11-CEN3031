@@ -30,22 +30,32 @@ public class WFC_Grid
 		}
 
 		Cell nextCell = collapseCell(grid[0, 0]);
-		while (nextCell != null)
-			nextCell = collapseCell(nextCell);
-			
-		//displayGrid();
+        while (nextCell != null)
+            nextCell = collapseCell(nextCell);
 
-		//Debug.Log("Created grid of size " + dimension + " by " + dimension);
+        //displayGrid();
 
-		//Test set low entropy
-		//grid[6, 9].setWeight(1);
+        //Debug.Log("Created grid of size " + dimension + " by " + dimension);
 
-		//findLeastEntropy();
+        //Test set low entropy
+        //grid[6, 9].setWeight(1);
 
-		//currentRule = rules.getRule(0);
-		//grid[6, 9].removeStates(ref currentRule[1]);
-		//grid[6, 9].collapse();
-	}
+        //findLeastEntropy();
+
+        //currentRule = rules.getRule(0);
+        //grid[6, 9].removeStates(ref currentRule[1]);
+        //grid[6, 9].collapse();
+    }
+
+	public int getCell(int r, int c)
+    {
+		return grid[r, c].getCurrentState();
+    }
+
+	public int getDimension()
+    {
+		return dimension;
+    }
 
 	public Cell findUnCollapsedCell()
     {
@@ -65,12 +75,13 @@ public class WFC_Grid
 
 	public Cell findLeastEntropy()
 	{
-		//AWFUL time complexity. come back to this [TK]
-		Cell startCell = findUnCollapsedCell();
-		if (startCell == null)
-			return null;
+        //AWFUL time complexity. come back to this [TK]
+        Cell startCell = findUnCollapsedCell();
+        if (startCell == null)
+            return null;
 
-		int minR = startCell.position[0], minC = startCell.position[1];
+        int minR = startCell.position[0], minC = startCell.position[1];
+		//int minR = 0, minC = 0;
 		for (int row = 0; row < dimension; row++)
 		{
 			for (int col = 0; col < dimension; col++)
@@ -85,6 +96,7 @@ public class WFC_Grid
 			}
 		}
 
+		//Debug.Log("Row: " + minR + ", Col: " + minC + ", Weight: " + grid[minR, minC].getWeight());
 		return grid[minR, minC];
 	}
 
@@ -94,8 +106,8 @@ public class WFC_Grid
 		{
 			int row = cell.position[0], col = cell.position[1];
 			cell.collapse();
-			//Debug.Log(cell.getCurrentState());
 			currentRule = rules.getRule(cell.getCurrentState());
+			//Debug.Log("CS Row: " + cell.position[0] + ", Col: " + cell.position[1]+ ", State: " + cell.getCurrentState());
 
 			//Go to neighbors, remove states
 			//UP
