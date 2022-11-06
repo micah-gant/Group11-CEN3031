@@ -44,20 +44,23 @@ public class Cell
 
     public void removeStates(ref int[] allowedStates) //aS for allowed states
     {
-        List<int> aS = new();
-        foreach(int a in allowedStates)
+        if (!checkIfCollapsed())
         {
-            aS.Add(a); //convert to List
-        }
+            List<int> aS = new();
+            foreach (int a in allowedStates)
+            {
+                aS.Add(a); //convert to List
+            }
 
-        //all I do is write bad code all day :/
-        IEnumerable<int> tempIE = (IEnumerable<int>)states.Intersect(aS);
-        states = tempIE.ToList();
-        weight = states.Count;
-        //Testing
-        //Debug.Log("Row: " + position[0] + ", Col: " + position[1]);
-        //foreach (int id in states)
-        //    Debug.Log(id);
+            //all I do is write bad code all day :/
+            IEnumerable<int> tempIE = (IEnumerable<int>)states.Intersect(aS);
+            states = tempIE.ToList();
+            weight = states.Count;
+            //Testing
+            //Debug.Log("Row: " + position[0] + ", Col: " + position[1]);
+            //foreach (int id in states)
+            //    Debug.Log(id);
+        }
     }
 
     public bool checkIfCollapsed()
@@ -69,8 +72,8 @@ public class Cell
 
     public void collapse()
     {
-        int rNum = Random.Range(0, states.Count-1);
-        //Debug.Log(states[rNum]);
+        int rNum = Random.Range(0, states.Count);
+        //Debug.Log("Row: " + position[0] + ", Col: " + position[1] + ", State: " + states[rNum]);
         currentState = states[rNum];
     }
 }

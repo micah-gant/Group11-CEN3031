@@ -27,6 +27,7 @@ public class OutputGen : MonoBehaviour
         {
             for(int col = 0; col < dimension; col++)
             {
+                int rand = Random.Range(0, 6);
                 Transform block = Instantiate(getState(grid.getCell(row, col)));
                 block.SetParent(par);
                 pos.x = posC;

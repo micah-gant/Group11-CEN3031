@@ -44,49 +44,49 @@ public class Rules
 	{
 		slopeUP = new int[][]
 		{
-			new int[] {TALL}, //UP
+			new int[] {TALL, SDOWN}, //UP
 			new int[] {SHRT,SUP}, //RIGHT
-			new int[] {SHRT}, //DOWN
+			new int[] {SHRT, SDOWN}, //DOWN
 			new int[] {SHRT,SUP}  //LEFT
 		};
 
 		slopeRIGHT = new int[][]
 		{
 			new int[] {SHRT,SRIGHT}, //UP
-			new int[] {TALL}, //RIGHT
+			new int[] {TALL, SLEFT}, //RIGHT
 			new int[] {SHRT,SRIGHT}, //DOWN
-			new int[] {SHRT}  //LEFT
+			new int[] {SHRT, SLEFT}  //LEFT
 		};
 
 		slopeDOWN = new int[][]
 		{
-			new int[] {SHRT}, //UP
+			new int[] {SHRT, SUP}, //UP
 			new int[] {SHRT,SDOWN}, //RIGHT
-			new int[] {TALL}, //DOWN
+			new int[] {TALL, SUP}, //DOWN
 			new int[] {SHRT,SDOWN}  //LEFT
 		};
 
 		slopeLEFT = new int[][]
 		{
 			new int[] {SHRT,SLEFT}, //UP
-			new int[] {SHRT}, //RIGHT
+			new int[] {SHRT, SRIGHT}, //RIGHT
 			new int[] {SHRT,SLEFT}, //DOWN
-			new int[] {TALL}  //LEFT
+			new int[] {TALL, SRIGHT}  //LEFT
 		};
 
 		shrt = new int[][]
 		{
-			new int[] {SHRT,SDOWN}, //UP
-			new int[] {SHRT,SRIGHT}, //RIGHT
-			new int[] {SHRT,SUP}, //DOWN
-			new int[] {SHRT,SLEFT}  //LEFT
+			new int[] {SHRT,SUP,SRIGHT,SLEFT}, //UP
+			new int[] {SHRT,SRIGHT,SUP,SDOWN}, //RIGHT
+			new int[] {SHRT,SDOWN,SRIGHT,SLEFT}, //DOWN
+			new int[] {SHRT,SLEFT,SUP,SDOWN}  //LEFT
 		};
 
 		tall = new int[][]
 		{
-			new int[] {TALL,SUP}, //UP
+			new int[] {TALL,SDOWN}, //UP
 			new int[] {TALL,SLEFT}, //RIGHT
-			new int[] {TALL,SDOWN}, //DOWN
+			new int[] {TALL,SUP}, //DOWN
 			new int[] {TALL,SRIGHT}  //LEFT
 		};
 	}
