@@ -17,10 +17,6 @@ public class OutputGen : MonoBehaviour
     public Transform TALL;
 
     //top right is positive X: +100 negative Z: -100
-    private void Awake()
-    {
-        
-    }
 
     private Transform getState(int state)
     {
