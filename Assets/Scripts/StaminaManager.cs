@@ -11,12 +11,11 @@ public class StaminaManager : MonoBehaviour
 
     // Display vals
     public TextMeshProUGUI scoreText;
-    public float collected = 100.0f;
 
     // Stamina vals
-    //private const int staminaCap = 100;
-    //private int maxStamina;
-    //private int currStamina;
+    public float staminaCap = 120.0f;
+    public float maxStamina = 100.0f;
+    public float currStamina = 100.0f;
     private float drain = 1.0f;
     #endregion
 
@@ -29,15 +28,20 @@ public class StaminaManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        collected = 100.0f;
-        //maxStamina = 100;
-        //currStamina = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
-        collected -= drain * Time.deltaTime;
-        scoreText.GetComponent<TextMeshProUGUI>().text = "COLLECTED: " + collected;
+        currStamina -= drain * Time.deltaTime;
+        if (currStamina > maxStamina)
+        {
+            currStamina = maxStamina;
+        }
+        if (maxStamina > staminaCap)
+        {
+            maxStamina = staminaCap;
+        }
+        scoreText.GetComponent<TextMeshProUGUI>().text = "STAMINA: " + currStamina + " OUT OF " + maxStamina;
     }
 }
