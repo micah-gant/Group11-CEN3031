@@ -17,11 +17,13 @@ public class Lush_Bounds_Behavior : MonoBehaviour
     [SerializeField] Material green;
 
     private SphereCollider col;
+    private bool colGot = false;
 
     private void Awake()
     {
         col = GetComponent<SphereCollider>();
         col.radius = startingRadius;
+        colGot = true;
 
         updateLush();
     }
@@ -46,10 +48,11 @@ public class Lush_Bounds_Behavior : MonoBehaviour
 
     public void inspectorExpandLush()
     {
-        if (col.radius < startingRadius)
+        if (!colGot)
         {
             col = GetComponent<SphereCollider>();
             col.radius = startingRadius;
+            colGot = true;
 
             updateLush();
         }
