@@ -13,13 +13,13 @@ public class StaminaBar : MonoBehaviour
 
     void Start()
     {
-        staminaBar.maxValue = staminaManager.maxStamina;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         staminaBar.value = staminaManager.currStamina;
-        Debug.Log(staminaManager.currStamina);
+        staminaBar.maxValue = staminaManager.maxStamina;
     }
 }
