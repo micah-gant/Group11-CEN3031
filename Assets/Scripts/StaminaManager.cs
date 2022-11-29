@@ -42,6 +42,6 @@ public class StaminaManager : MonoBehaviour
         {
             maxStamina = staminaCap;
         }
-        scoreText.GetComponent<TextMeshProUGUI>().text = "STAMINA: " + currStamina + " OUT OF " + maxStamina;
+        scoreText.GetComponent<TextMeshProUGUI>().text = "STAMINA: " + (currStamina)*1.0f + " OUT OF " + maxStamina;
     }
 }
