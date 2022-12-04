@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2570745899811625682}
   - component: {fileID: 2570745899811625693}
   - component: {fileID: 2570745899811625681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BadFood
   m_TagString: Collectable
   m_Icon: {fileID: 0}

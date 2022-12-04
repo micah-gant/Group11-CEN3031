@@ -13,17 +13,21 @@ public class StaminaManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     // Stamina vals
+    [Tooltip("Limit for largest possible value of maxStamina.")]
     public float staminaCap = 120.0f;
+
+    [Tooltip("Limit for smallest possible value of maxStamina.")]
+    public float staminaFloor = 30.0f;
+
+    [Tooltip("Current largest stamina value for player. Changed by type of food collected.")]
     public float maxStamina = 100.0f;
+
+    [Tooltip("Current stamina of player.")]
     public float currStamina = 100.0f;
+
+    [Tooltip("Rate of stamina drain.")]
     private float drain = 1.0f;
     #endregion
-
-    // Have starting stamina initialized
-    // In update, have stamina decreasing at a steady rate
-    // Collection of food (collectible) can alter curr or max stamina
-    // Bad food restores 5 stamina but drops max
-    // Good food restores 10 stamina and recovers to max stamina
 
     void Awake()
     {
@@ -34,14 +38,24 @@ public class StaminaManager : MonoBehaviour
     void Update()
     {
         currStamina -= drain * Time.deltaTime;
+        
+        // If current stamina overshoots, clamp
         if (currStamina > maxStamina)
         {
             currStamina = maxStamina;
         }
+
+        // If max stamina overshoots, clamp
         if (maxStamina > staminaCap)
         {
             maxStamina = staminaCap;
         }
-        scoreText.GetComponent<TextMeshProUGUI>().text = "STAMINA: " + (currStamina)*1.0f + " OUT OF " + maxStamina;
+
+        // If max stamina undershoots, clamp
+        if (maxStamina < staminaFloor)
+        {
+            maxStamina = staminaFloor;
+        }
+        scoreText.GetComponent<TextMeshProUGUI>().text = "STAMINA: " + (currStamina) + " OUT OF " + maxStamina;
     }
 }

@@ -12,25 +12,31 @@ public class PlayerCameraMovement : MonoBehaviour
 
     [Header("Status Values")]
     [Tooltip("Player's speed. Determines how fast they move in all aspects.")]
-    private float playerSpeed = 15.0f;
+    public float playerSpeed = 10.0f;
     [Tooltip("Player's rotation speed. Determines how fast their body orients to match new movement direction.")]
-    private float rotationFactorPerFrame = 15.0f;
+    public float rotationFactorPerFrame = 10.0f;
     #endregion
 
     void Update()
     {
         // Player Inputs: scalars that determine how much a player moves.
         float horizontal = Input.GetAxisRaw("Horizontal");  // Right-Left
-        float normal = 0.0f;                                // Up-Down (change when jumping/falling)
         float vertical = Input.GetAxisRaw("Vertical");      // Forward-Backward
 
-        // DEBUG: IMPLEMENT GRAVITY CHECK.
+        Vector3 input = new Vector3(horizontal, 0.0f, vertical);
 
-        Vector3 input = new Vector3(horizontal, normal, vertical);
+        // Gravity: if not grounded, do move independent of 2D and camera movement.
+        Vector3 moveVector = Vector3.zero;
+        if (player.isGrounded == false)
+        {
+            moveVector += Physics.gravity;
+            player.Move(moveVector * Time.deltaTime);
+        }
 
         // If player gives input, calculate.
         if (input != Vector3.zero)
         {
+            Debug.Log("Move detected");
             CameraDisplacement(input);
         }
     }
@@ -39,7 +45,8 @@ public class PlayerCameraMovement : MonoBehaviour
     {
         Vector3 relativeMove = CameraRelativityCalculation(input);
         handleRotation(input, relativeMove);
-        player.Move(relativeMove * playerSpeed * Time.deltaTime);
+        relativeMove = relativeMove * playerSpeed * Time.deltaTime;
+        player.Move(relativeMove);
     }
 
     // Calculates direction to move in based on camera's directionals and input.
